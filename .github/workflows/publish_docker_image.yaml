@@ -41,6 +41,7 @@ jobs:
       # Docker イメージをビルドする
       - name: Build
         run: |-
+          ./gradlew build
           docker build \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
