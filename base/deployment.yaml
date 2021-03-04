@@ -1,0 +1,21 @@
+apiversion: apps/v1
+kind: deployment
+metadata:
+  name: knowledge-deployment
+  labels:
+    app: knowledge
+spec:
+  replicas: 3
+  selector:
+    matchlabels:
+      app: knowledge
+  template:
+    metadata:
+      labels:
+        app: knowledge
+    spec:
+      containers:
+      - name: knowledge
+        image: gcr.io/my-demo-project-20210227/knowledge
+        ports:
+        - containerPort: 80
