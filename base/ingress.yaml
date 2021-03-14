@@ -8,3 +8,4 @@ spec:
   backend:
     serviceName: knowledge-service
     servicePort: 80
+  type: NodePort
