@@ -9,7 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: knowledge-cluster
   GKE_ZONE: asia-northeast1-a
-  DEPLOYMENT_NAME: knowledge
+  DEPLOYMENT_NAME: knowledge-deployment
   IMAGE: knowledge
 
 jobs:
@@ -69,5 +69,5 @@ jobs:
         run: |-
           ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           ./kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment/$DEPLOYMENT_NAME
+          kubectl rollout status deployment.apps/$DEPLOYMENT_NAME
           kubectl get services -o wide
