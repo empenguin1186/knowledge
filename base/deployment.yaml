@@ -18,4 +18,4 @@ spec:
       - name: knowledge
         image: gcr.io/my-demo-project-20210227/knowledge
         ports:
-        - containerPort: 80
+        - containerPort: 8080
