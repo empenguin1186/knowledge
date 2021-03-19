@@ -5,6 +5,15 @@ metadata:
   labels:
     app: knowledge
 spec:
-  backend:
-    serviceName: knowledge-service
-    servicePort: 80
+  tls:
+    - hosts:
+        - empenguin1186.bar.com
+      secretName: tls-secret
+  rules:
+    - host: empenguin1186.bar.com
+      http:
+        paths:
+          - backend:
+              serviceName: knowledge-service
+              servicePort: 80
+            path: /
