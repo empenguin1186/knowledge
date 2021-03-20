@@ -10,6 +10,6 @@ internal class MainControllerTest {
 
     @Test
     fun `テスト`() {
-        Assertions.assertEquals(2, 1 + 1)
+        Assertions.assertEquals(2, 1)
     }
 }
