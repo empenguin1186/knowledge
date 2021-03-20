@@ -17,7 +17,6 @@ jobs:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -71,3 +70,14 @@ jobs:
           ./kustomize build . | kubectl apply -f -
           kubectl rollout status deployment.apps/$DEPLOYMENT_NAME
           kubectl get ingress -o wide
+
+      # ジョブの実行結果を Slack に投稿する
+      - name: Notificate Slack Channel
+        uses: rtCamp/action-slack-notify@v2
+        if: always()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_MESSAGE: "Job Result: ${{ job.status }}"
+          SLACK_TITLE: Job Result
+          SLACK_USERNAME: Job Result Bot
