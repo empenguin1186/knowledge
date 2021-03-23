@@ -1,8 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.4.3"
-	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	id("org.springframework.boot") version "2.4.4"
 	kotlin("jvm") version "1.4.30"
 	kotlin("plugin.spring") version "1.4.30"
 }
@@ -17,11 +16,22 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-actuator")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
 //	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+val springBootVersion = "2.4.3"
+configurations.all {
+	resolutionStrategy.eachDependency {
+		if (requested.group == "org.springframework.boot") {
+			useVersion(springBootVersion)
+		}
+	}
 }
 
 tasks.withType<KotlinCompile> {
