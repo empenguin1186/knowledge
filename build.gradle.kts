@@ -25,11 +25,13 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-val springBootVersion = "2.4.3"
-configurations.all {
-	resolutionStrategy.eachDependency {
-		if (requested.group == "org.springframework.boot") {
-			useVersion(springBootVersion)
+val springBootVersion = "2.4.4"
+configurations {
+	all {
+		resolutionStrategy.eachDependency {
+			if (requested.group == "org.springframework.boot") {
+				useVersion(springBootVersion)
+			}
 		}
 	}
 }
