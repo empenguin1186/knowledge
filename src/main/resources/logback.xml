@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="ACCESS_LOG" class="ch.qos.logback.core.ConsoleAppender"> <!-- (1) -->
+        <encoder>
+            <pattern>date=%d{yyyy-MM-dd HH:mm:ss.SSS}\tstatus_code=%X{status_code}\trequest_url=%X{request_url}\tlatency=%X{latency}\tuuid=%X{uuid}%n</pattern> <!-- (2) -->
+        </encoder>
+    </appender>
+
+    <appender name="SERVER_LOG" class="ch.qos.logback.core.ConsoleAppender"> <!-- (1) -->
+        <encoder>
+            <pattern>date=%d{yyyy-MM-dd HH:mm:ss.SSS}\tlevel=%level\tlogger=%logger{0}\tuuid=%X{uuid}\tmessage="%m"\t%ex{short}%n</pattern> <!-- (2) -->
+        </encoder>
+    </appender>
+
+    <logger name="jp.co.emperor.penguin.knowledge.filter.AccessLoggingFilter" additivity="false" level="INFO"> <!-- (3) -->
+        <appender-ref ref="ACCESS_LOG" />
+    </logger>
+
+    <root level="INFO"> <!-- (4) -->
+        <appender-ref ref="SERVER_LOG" />
+    </root>
+</configuration>

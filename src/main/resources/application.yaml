@@ -1,1 +1,10 @@
-
+grpc:
+  enableReflection: true
+spring:
+  application:
+    name: my_spring_boot_app
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
