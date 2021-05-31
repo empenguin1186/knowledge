@@ -4,6 +4,8 @@ metadata:
   name: knowledge-ingress
   labels:
     app: knowledge
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
 spec:
   tls:
     - hosts:
