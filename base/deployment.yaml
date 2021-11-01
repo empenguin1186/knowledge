@@ -5,7 +5,7 @@ metadata:
   labels:
     app: knowledge
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: knowledge
@@ -14,8 +14,15 @@ spec:
       labels:
         app: knowledge
     spec:
+#      terminationGracePeriodSeconds: 0
       containers:
       - name: knowledge
-        image: gcr.io/my-demo-project-20210227/knowledge
+        image: knowledge:latest
+        # image: gcr.io/my-demo-project-20210227/knowledge
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sh", "-c", "sleep 10; curl -X POST http://localhost:8080/actuator/shutdown"]

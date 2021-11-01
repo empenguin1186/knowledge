@@ -3,8 +3,21 @@ grpc:
 spring:
   application:
     name: my_spring_boot_app
+server:
+  shutdown: graceful
+  port: 8443
+  ssl:
+    protocol: TLSv1.2
+    key-store-type: PKCS12
+    key-store: classpath:secret/mykeystore.p12
+    key-password: changeit
+    key-alias: mykeystore
+    enabled: true
 management:
+  endpoint:
+    shutdown:
+      enabled: true
   endpoints:
     web:
       exposure:
-        include: prometheus
+        include: "prometheus,shutdown"

@@ -48,7 +48,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator:2.4.5")
 }
 
-val springBootVersion = "2.4.4"
+val springBootVersion = "2.5.2"
 configurations {
 	all {
 		resolutionStrategy.eachDependency {
